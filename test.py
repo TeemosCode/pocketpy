@@ -1,3 +1,5 @@
+
+#this isn't a bad approach, but I'm considering changing it to matplotlib before august...
 from visual import *
 
 fps = 48
