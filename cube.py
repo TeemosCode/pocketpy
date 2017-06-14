@@ -936,10 +936,18 @@ def cube_search():
 #time the program
 start = time.time()
 print "Program started ..."
-#
+######################################################some thoughts on how to improve this without touching that huge chunk of searching solution#################
+learningMap = {}#{cube_test.get_status(): steps,}  Obatains and Retains the inputs and its corresponding outputs.... (but ain't inferential though... not much of a smart way lel)
+if learningMap.get(cube_test.get_status(), []) != []:
+    steps = learningMap[cube_test.get_status()]
+    print steps
+else:
+    steps = cube_search()
+    
+    learningMap[cube_test.get_status()] = steps
+    print steps
 
-steps = cube_search()
-print steps
+
 
 #Program ended total time spent
 print "===========================DONE=====================\nTime Spent: %s , Seconds" % (time.time()-start)
