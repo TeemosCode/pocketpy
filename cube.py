@@ -1,4 +1,5 @@
 from visual import *
+import time
 # Piece(0) = (0, 0, 0) -> (x, y, z)
 # Piece(1) = (1, 0, 0)
 # Piece(2) = (0, 1, 0)
@@ -30,14 +31,14 @@ class Cube(object):
     def get_status(self):
         return ' ' * 2 + self.piece_4.back + self.piece_6.back + '\n' + ' ' * 2 + self.piece_0.back + self.piece_2.back + '\n' + self.piece_4.left + self.piece_0.left + self.piece_0.down + self.piece_2.down + self.piece_2.right + self.piece_6.right + self.piece_6.up + self.piece_4.up + '\n' + self.piece_5.left + self.piece_1.left + self.piece_1.down + self.piece_3.down + self.piece_3.right + self.piece_7.right + self.piece_7.up + self.piece_5.up + '\n' + ' ' * 2 + self.piece_1.front + self.piece_3.front + '\n' + ' ' * 2 + self.piece_5.front + self.piece_7.front 
 
-sticks_0 = ['' for i in range(6)]
-sticks_1 = ['' for i in range(6)]
-sticks_2 = ['' for i in range(6)]
-sticks_3 = ['' for i in range(6)]
-sticks_4 = ['' for i in range(6)]
-sticks_5 = ['' for i in range(6)]
-sticks_6 = ['' for i in range(6)]
-sticks_7 = ['' for i in range(6)]
+sticks_0 = ['' for i in xrange(6)]
+sticks_1 = ['' for i in xrange(6)]
+sticks_2 = ['' for i in xrange(6)]
+sticks_3 = ['' for i in xrange(6)]
+sticks_4 = ['' for i in xrange(6)]
+sticks_5 = ['' for i in xrange(6)]
+sticks_6 = ['' for i in xrange(6)]
+sticks_7 = ['' for i in xrange(6)]
 
 print "piece_0:"
 
@@ -810,11 +811,11 @@ def cube_search():
     visited_solved = []
     dict_solved = {}
 
-    for i in range(6):
+    for i in xrange(6):
         
         time1 = len(frontier_unsolved)
         time2 = len(frontier_solved)
-        for j in range(time1):
+        for j in xrange(time1):
             curcost, curpath, curstatus = frontier_unsolved.pop()
             if curstatus.get_status() not in visited_unsolved:
                 visited_unsolved.append(curstatus.get_status())
@@ -873,7 +874,7 @@ def cube_search():
                 frontier_unsolved.sort()
                 frontier_unsolved.reverse()
 
-        for k in range(time2):
+        for k in xrange(time2):
             curcost, curpath, curstatus = frontier_solved.pop()
             if curstatus.get_status() not in visited_solved:
                 visited_solved.append(curstatus.get_status())
@@ -932,9 +933,17 @@ def cube_search():
 
                 frontier_solved.sort()
                 frontier_solved.reverse()
+#time the program
+start = time.time()
+print "Program started ..."
+#
 
 steps = cube_search()
 print steps
+
+#Program ended total time spent
+print "===========================DONE=====================\nTime Spent: %s , Seconds" % (time.time()-start)
+#
 
 color_trans = {'R': color.red, 'O': color.orange, 'G': color.green, 'B': color.blue, 'W': color.white, 'Y': color.yellow}
 
